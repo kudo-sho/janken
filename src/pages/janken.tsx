@@ -1,13 +1,13 @@
-// pages/janken.js
+// File: /pages/janken.tsx
 import { useState } from 'react';
 
-const Janken = () => {
-  const choices = ['グー', 'チョキ', 'パー'];
-  const [userChoice, setUserChoice] = useState(null);
-  const [computerChoice, setComputerChoice] = useState(null);
-  const [result, setResult] = useState('');
+const Janken: React.FC = () => {
+  const choices: Array<'グー' | 'チョキ' | 'パー'> = ['グー', 'チョキ', 'パー'];
+  const [userChoice, setUserChoice] = useState<'グー' | 'チョキ' | 'パー' | null>(null);
+  const [computerChoice, setComputerChoice] = useState<'グー' | 'チョキ' | 'パー' | null>(null);
+  const [result, setResult] = useState<string>('');
 
-  const playJanken = (userSelection) => {
+  const playJanken = (userSelection: 'グー' | 'チョキ' | 'パー') => {
     const computerSelection = choices[Math.floor(Math.random() * choices.length)];
     setUserChoice(userSelection);
     setComputerChoice(computerSelection);
