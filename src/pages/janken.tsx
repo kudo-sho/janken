@@ -1,11 +1,10 @@
-// File: /pages/janken.tsx
 import { useState } from 'react';
 
 const Janken: React.FC = () => {
   const choices: Array<'グー' | 'チョキ' | 'パー'> = ['グー', 'チョキ', 'パー'];
   const [userChoice, setUserChoice] = useState<'グー' | 'チョキ' | 'パー' | null>(null);
   const [computerChoice, setComputerChoice] = useState<'グー' | 'チョキ' | 'パー' | null>(null);
-  const [result, setResult] = useState<string>('');
+  const [result, setResult] = useState<{ message: string; image?: string } | null>(null);
 
   const playJanken = (userSelection: 'グー' | 'チョキ' | 'パー') => {
     const computerSelection = choices[Math.floor(Math.random() * choices.length)];
@@ -13,15 +12,15 @@ const Janken: React.FC = () => {
     setComputerChoice(computerSelection);
 
     if (userSelection === computerSelection) {
-      setResult('引き分け');
+      setResult({ message: '引き分け' });
     } else if (
       (userSelection === 'グー' && computerSelection === 'チョキ') ||
       (userSelection === 'チョキ' && computerSelection === 'パー') ||
       (userSelection === 'パー' && computerSelection === 'グー')
     ) {
-      setResult('勝ち');
+      setResult({ message: '勝ち' });
     } else {
-      setResult('負け');
+      setResult({ message: '負け', image: '/images/lose.png' });
     }
   };
 
@@ -48,7 +47,16 @@ const Janken: React.FC = () => {
         <div style={{ marginTop: '20px' }}>
           <p>あなたの選択: {userChoice}</p>
           <p>コンピュータの選択: {computerChoice}</p>
-          <h2>結果: {result}</h2>
+          <h2>結果: {result?.message}</h2>
+          {result?.image && (
+            <div style={{ marginTop: '20px' }}>
+              <img
+                src={result.image}
+                alt="負け画像"
+                style={{ maxWidth: '300px', height: 'auto' }}
+              />
+            </div>
+          )}
         </div>
       )}
     </div>
