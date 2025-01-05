@@ -12,15 +12,15 @@ const Janken: React.FC = () => {
     setComputerChoice(computerSelection);
 
     if (userSelection === computerSelection) {
-      setResult({ message: '引き分け' });
+      setResult({ message: '引き分けです。' , image: '/images/draw.png'});
     } else if (
       (userSelection === 'グー' && computerSelection === 'チョキ') ||
       (userSelection === 'チョキ' && computerSelection === 'パー') ||
       (userSelection === 'パー' && computerSelection === 'グー')
     ) {
-      setResult({ message: '勝ち' });
+      setResult({ message: 'あなたの勝ちです。' , image: '/images/win.png'});
     } else {
-      setResult({ message: '負け', image: '/images/lose.png' });
+      setResult({ message: 'あなたの負けです。' , image: '/images/lose.png'});
     }
   };
 
@@ -52,7 +52,7 @@ const Janken: React.FC = () => {
             <div style={{ marginTop: '20px' }}>
               <img
                 src={result.image}
-                alt="負け画像"
+                alt="結果画像"
                 style={{ maxWidth: '300px', height: 'auto' }}
               />
             </div>
